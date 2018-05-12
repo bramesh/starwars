@@ -11,7 +11,7 @@ import registerServiceWorker from './registerServiceWorker';
 import './bootstrap.min.css';
 import Home from './components/pages/Home/Home';
 import AppRoutes from './routes';
-import Nav from './components/Nav.js';
+import MenuAppBar from './components/MenuAppBar.js';
 
 
 const middleware =applyMiddleware(thunk, logger);
@@ -27,7 +27,7 @@ const App = () => (
 	<Provider store={store}>
 		<Router>
 			<div>
-				<Nav />
+				<MenuAppBar />
 				<AppRoutes />
 			</div>
 		</Router>

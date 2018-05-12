@@ -1,5 +1,15 @@
 import React, { Component } from 'react';
 import './Home.css';
+import { withStyles } from 'material-ui/styles';
+import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
+import StarIcon from '@material-ui/icons/Star';
+
+const styles = {
+  home: {
+    display: 'flex'
+  }
+
+};
 
 class Home extends Component {
   state = {
@@ -21,15 +31,23 @@ class Home extends Component {
     return body;
   };
   render() {
+    const { classes } = this.props;
     return (
-      <div className="Home">
-        <p className="Home-intro">
-          To get started, edit <code>src/Home.js</code> and save to reload.
-        </p>
-        <p className="Home-intro">{this.state.response}</p>
+      <div className={classes.home}>
+        <List component="nav">
+          <ListItem button>
+            <ListItemIcon>
+              <StarIcon />
+            </ListItemIcon>
+            <ListItemText inset primary="Chelsea Otakan" />
+          </ListItem>
+          <ListItem button>
+            <ListItemText inset primary="Eric Hoffman" />
+          </ListItem>
+        </List>
       </div>
     );
   }
 }
 
-export default Home;
+export default withStyles(styles)(Home);

@@ -1,0 +1,34 @@
+[
+  {
+    school: "Coleytown Elementary School",
+    familyName: "Aggarwal",
+    homePhone: "203-425-9567",
+    address: {
+      street: "6 Garden Ln",
+      city: "Westport",
+      state: "CT",
+      zip: "06880"
+    },
+    parents: [
+      {
+        first: "Komal",
+        last: "Vora",
+        email: "kvora@compuchild.com",
+        phone: "203-921-7905"
+      },
+      {
+        first: "Neeraj",
+        last: "Aggarwal",
+        email: "aggarwne@yahoo.com",
+        phone: "203-921-7906"
+      }
+    ],
+    children: [
+      {
+        first: "Suhani",
+        last: "Aggarwal",
+        class: "5"
+      }
+    ]
+  }
+]
