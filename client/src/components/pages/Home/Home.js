@@ -34,17 +34,7 @@ class Home extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.home}>
-        <List component="nav">
-          <ListItem button>
-            <ListItemIcon>
-              <StarIcon />
-            </ListItemIcon>
-            <ListItemText inset primary="Chelsea Otakan" />
-          </ListItem>
-          <ListItem button>
-            <ListItemText inset primary="Eric Hoffman" />
-          </ListItem>
-        </List>
+
       </div>
     );
   }
