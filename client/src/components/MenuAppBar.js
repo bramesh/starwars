@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { withStyles } from 'material-ui/styles';
 import Drawer from 'material-ui/Drawer';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
+import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import Hidden from 'material-ui/Hidden';
@@ -19,6 +21,15 @@ import { FormControl, FormHelperText } from 'material-ui/Form';
 import People from '@material-ui/icons/People';
 import Assignment from '@material-ui/icons/Assignment';
 
+import ExpansionPanel, {
+  ExpansionPanelDetails,
+  ExpansionPanelSummary
+} from 'material-ui/ExpansionPanel';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
+import Paper from 'material-ui/Paper';
+
+
 import mobileArq from './icons/mobileArq.png';
 
 
@@ -27,10 +38,7 @@ const drawerWidth = 240;
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    height: 430,
     zIndex: 1,
-    overflow: 'hidden',
-    position: 'relative',
     display: 'flex',
     width: '100%',
   },
@@ -60,7 +68,45 @@ const styles = theme => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing.unit * 3,
-    marginTop: '60px'
+    marginTop: '60px',
+  },
+  contentOptions: {
+    textAlign: 'center',
+    padding: 10
+  },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+  },
+  secondaryHeading: {
+    fontSize: theme.typography.pxToRem(15),
+    color: theme.palette.text.secondary,
+  },
+  details: {
+    alignItems: 'center',
+  },
+  column: {
+    minWidth: 150,
+    padding: 10
+  },
+  helper: {
+    borderLeft: `2px solid ${theme.palette.divider}`,
+    padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
+  },
+  link: {
+    color: theme.palette.primary.main,
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'underline',
+    },
+  },
+  paper: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
+    width: '100%',
+    padding: 20,
+    marginTop: theme.spacing.unit * 3,
+    marginBottom: 20
   },
 });
 
@@ -69,6 +115,7 @@ class MenuAppBar extends React.Component {
     auth: true,
     anchorEl: null,
     school: 3,
+    class: 1,
     mobileOpen: false
   };
 
@@ -85,6 +132,10 @@ class MenuAppBar extends React.Component {
   };
 
   handleSchoolChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
+  handleClassChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
 
@@ -143,23 +194,6 @@ class MenuAppBar extends React.Component {
             </Typography>
             {auth && (
               <div>
-                <FormControl>
-                  <InputLabel htmlFor="school-simple">School</InputLabel>
-                  <Select
-                    value={this.state.school}
-                    onChange={this.handleSchoolChange}
-                    inputProps={{
-                      name: 'school',
-                      id: 'school-simple',
-                    }}
-                    autoWidth
-                  >
-                    <MenuItem value={1}>Coleytown Elementary School</MenuItem>
-                    <MenuItem value={2}>Greens Farms Elementary School</MenuItem>
-                    <MenuItem value={3}>Kings Highway Elementary School</MenuItem>
-                    <MenuItem value={4}>Long lots Elementary School</MenuItem>
-                  </Select>
-                </FormControl>
                 <IconButton
                   aria-owns={open ? 'menu-appbar' : null}
                   aria-haspopup="true"
@@ -218,16 +252,238 @@ class MenuAppBar extends React.Component {
           </Drawer>
         </Hidden>
         <main className={classes.content}>
-          <div>
-          <List>
-            <ListItem button>
-              <ListItemText inset primary="Chelsea Otakan" />
-            </ListItem>
-            <ListItem button>
-              <ListItemText inset primary="Eric Hoffman" />
-            </ListItem>
-          </List>
-          </div>
+          <Grid container>
+            <Grid item xs={12}>
+              <Grid
+                container
+                spacing={16}
+                className={classes.demo}
+              >
+                <Paper className={classes.paper} elevation={10}>
+                  <Grid item>
+                    <div className={classes.column}>
+                      <FormControl>
+                        <InputLabel htmlFor="school-simple">School</InputLabel>
+                        <Select
+                          value={this.state.school}
+                          onChange={this.handleSchoolChange}
+                          inputProps={{
+                            name: 'school',
+                            id: 'school-simple',
+                          }}
+                          autoWidth
+                        >
+                          <MenuItem value={1}>Coleytown Elementary School</MenuItem>
+                          <MenuItem value={2}>Greens Farms Elementary School</MenuItem>
+                          <MenuItem value={3}>Kings Highway Elementary School</MenuItem>
+                          <MenuItem value={4}>Long lots Elementary School</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </Grid>
+                  <Grid item>
+                    <div className={classes.column}>
+                      <FormControl>
+                        <InputLabel htmlFor="class-simple">Class</InputLabel>
+                        <Select
+                          value={this.state.class}
+                          onChange={this.handleClassChange}
+                          inputProps={{
+                            name: 'class',
+                            id: 'class-simple',
+                          }}
+                          autoWidth
+                        >
+                          <MenuItem value={1}>1k</MenuItem>
+                          <MenuItem value={2}>2k</MenuItem>
+                          <MenuItem value={3}>3k</MenuItem>
+                          <MenuItem value={4}>4k</MenuItem>
+                        </Select>
+                      </FormControl>
+                    </div>
+                  </Grid>
+                  <Grid item>
+                  <div className={classes.column}>
+                    whosdfa sadfiowesdf k
+                  </div>
+                  </Grid>
+                </Paper>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Typography variant="headline">
+            Families
+          </Typography>
+          <Hidden mdUp>
+            <ExpansionPanel defaultExpanded>
+              <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                <div className={classes.column}>
+                  <Typography variant="title">
+                    ABRAMS
+                  </Typography>
+                  47 Oak St<br />
+                  Westport, CT 06880
+                </div>
+              </ExpansionPanelSummary>
+              <Divider />
+              <ExpansionPanelDetails className={classes.details}>
+              <Grid container>
+                <Grid item xs={12}>
+                  <Grid
+                    container
+                    spacing={16}
+                    className={classes.demo}
+                  >
+                    <Grid item>
+                      <div className={classes.column}>
+                        <Typography variant="caption">
+                          Parent
+                        </Typography>
+                        <Typography variant="title">
+                          Lauren
+                        </Typography>
+                        203-470-8539<br />
+                        lauren.a.shea@gmail.com
+                      </div>
+                    </Grid>
+                    <Grid item>
+                      <div className={classes.column}>
+                        <Typography variant="caption">
+                          Parent
+                        </Typography>
+                        <Typography variant="title">
+                          Lauren
+                        </Typography>
+                        203-470-8539<br />
+                        lauren.a.shea@gmail.com
+                      </div>
+                    </Grid>
+                    <Grid item>
+                      <div className={classes.column}>
+                        <Typography variant="caption">
+                          Parent
+                        </Typography>
+                        <Typography variant="title">
+                          Lauren
+                        </Typography>
+                        203-470-8539<br />
+                        lauren.a.shea@gmail.com
+                      </div>
+                    </Grid>
+                    <Grid item>
+                      <div className={classes.column}>
+                        <Typography variant="caption">
+                          Parent
+                        </Typography>
+                        <Typography variant="title">
+                          Lauren
+                        </Typography>
+                        203-470-8539<br />
+                        lauren.a.shea@gmail.com
+                      </div>
+                    </Grid>
+                    <Grid item>
+                      <div className={classes.column}>
+                        <Typography variant="caption">
+                          Parent
+                        </Typography>
+                        <Typography variant="title">
+                          Lauren
+                        </Typography>
+                        203-470-8539<br />
+                        lauren.a.shea@gmail.com
+                      </div>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
+              </ExpansionPanelDetails>
+              <Divider />
+            </ExpansionPanel>
+          </Hidden>
+          <Hidden smDown implementation="css">
+            <Grid container>
+              <Grid item xs={12}>
+                <Grid
+                  container
+                  spacing={16}
+                  className={classes.demo}
+                >
+                  <Paper className={classes.paper}>
+                    <Grid item>
+                      <div className={classes.column}>
+                        <Typography variant="title">
+                          ABRAMS
+                        </Typography>
+                        47 Oak St<br />
+                        Westport, CT 06880
+                      </div>
+                    </Grid>
+                    <Grid item>
+                      <div className={classes.column}>
+                        <Typography variant="caption">
+                          Parent
+                        </Typography>
+                        <Typography variant="title">
+                          Lauren
+                        </Typography>
+                        203-470-8539<br />
+                        lauren.a.shea@gmail.com
+                      </div>
+                    </Grid>
+                    <Grid item>
+                      <div className={classes.column}>
+                        <Typography variant="caption">
+                          Parent
+                        </Typography>
+                        <Typography variant="title">
+                          Lauren
+                        </Typography>
+                        203-470-8539<br />
+                        lauren.a.shea@gmail.com
+                      </div>
+                    </Grid>
+                    <Grid item>
+                      <div className={classes.column}>
+                        <Typography variant="caption">
+                          Parent
+                        </Typography>
+                        <Typography variant="title">
+                          Lauren
+                        </Typography>
+                        203-470-8539<br />
+                        lauren.a.shea@gmail.com
+                      </div>
+                    </Grid>
+                    <Grid item>
+                      <div className={classes.column}>
+                        <Typography variant="caption">
+                          Parent
+                        </Typography>
+                        <Typography variant="title">
+                          Lauren
+                        </Typography>
+                        203-470-8539<br />
+                        lauren.a.shea@gmail.com
+                      </div>
+                    </Grid>
+                    <Grid item>
+                      <div className={classes.column}>
+                        <Typography variant="caption">
+                          Parent
+                        </Typography>
+                        <Typography variant="title">
+                          Lauren
+                        </Typography>
+                        203-470-8539<br />
+                        lauren.a.shea@gmail.com
+                      </div>
+                    </Grid>
+                  </Paper>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Hidden>
         </main>
       </div>
     );
