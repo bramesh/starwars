@@ -15,11 +15,11 @@ import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Menu, { MenuItem } from 'material-ui/Menu';
 import Input, { InputLabel } from 'material-ui/Input';
+import TextField from 'material-ui/TextField';
 import Select from 'material-ui/Select';
 import { FormControl, FormHelperText } from 'material-ui/Form';
 
-import People from '@material-ui/icons/People';
-import Assignment from '@material-ui/icons/Assignment';
+import {People, Assignment, Info, AccountBox, DateRange} from '@material-ui/icons';
 
 import ExpansionPanel, {
   ExpansionPanelDetails,
@@ -31,6 +31,7 @@ import Paper from 'material-ui/Paper';
 
 
 import mobileArq from './icons/mobileArq.png';
+import Search from './Search.js';
 
 
 const drawerWidth = 240;
@@ -58,6 +59,9 @@ const styles = theme => ({
     },
   },
   toolbar: theme.mixins.toolbar,
+  textField: {
+    width: '100%',
+  },
   drawerPaper: {
     width: drawerWidth,
     [theme.breakpoints.up('md')]: {
@@ -155,24 +159,34 @@ class MenuAppBar extends React.Component {
             <ListItemIcon>
               <People />
             </ListItemIcon>
-            <ListItemText primary="Parents" />
+            <ListItemText primary="Families" />
           </ListItem>
           <ListItem button>
             <ListItemIcon>
               <Assignment />
             </ListItemIcon>
-            <ListItemText primary="Students" />
+            <ListItemText primary="Faculty" />
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon>
+              <AccountBox />
+            </ListItemIcon>
+            <ListItemText primary="Members" />
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon>
+              <Info />
+            </ListItemIcon>
+            <ListItemText primary="School Info" />
+          </ListItem>
+          <ListItem button>
+            <ListItemIcon>
+              <DateRange />
+            </ListItemIcon>
+            <ListItemText primary="Calendar" />
           </ListItem>
         </List>
         <Divider />
-        <List component="nav">
-          <ListItem button>
-            <ListItemText primary="Faculty" />
-          </ListItem>
-          <ListItem button component="a" href="#simple-list">
-            <ListItemText primary="Members" />
-          </ListItem>
-        </List>
       </div>
     );
 
@@ -304,7 +318,8 @@ class MenuAppBar extends React.Component {
                   </Grid>
                   <Grid item>
                   <div className={classes.column}>
-                    whosdfa sadfiowesdf k
+                    <Search />
+
                   </div>
                   </Grid>
                 </Paper>
@@ -315,7 +330,7 @@ class MenuAppBar extends React.Component {
             Families
           </Typography>
           <Hidden mdUp>
-            <ExpansionPanel defaultExpanded>
+            <ExpansionPanel>
               <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                 <div className={classes.column}>
                   <Typography variant="title">
