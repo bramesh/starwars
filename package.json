@@ -4,7 +4,8 @@
   "scripts": {
     "client": "cd client && yarn start",
     "server": "nodemon server.js",
-    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "start": "cd client && yarn start"
   },
   "dependencies": {
     "@material-ui/core": "^1.0.0-rc.1",
