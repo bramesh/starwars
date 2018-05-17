@@ -4,6 +4,8 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 5000;
 
+app.use('/', express.static(`${__dirname}/client/build`));
+
 var users = [];
 fs.readFile('users.json', {encoding: 'utf-8'}, function(err, data) {
   if(err) throw err;
