@@ -22,7 +22,7 @@ class Features extends Component {
   render() {
     return (
       <div className="Home">
-        <p className="Home-intro"></p>
+        <p className="Home-intro">Features</p>
       </div>
     );
   }
