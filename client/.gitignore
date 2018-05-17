@@ -7,7 +7,7 @@
 /coverage
 
 # production
-/build
+# TODO - This build folder should be generated automatically in production too /build
 
 # misc
 .DS_Store
