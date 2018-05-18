@@ -1,16 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
 import Layout from '../Layout.js';
-import ContentHeader from '../ContentHeader.js';
 import Content from '../Content.js';
+
 
 class Family extends React.Component {
   render() {
+    const { classes } = this.props;
     return(
       <Layout render={() => (
         <div>
-          <ContentHeader title="Families" />
           <Content />
         </div>
       )} />

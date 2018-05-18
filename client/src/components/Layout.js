@@ -15,11 +15,22 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Hidden from '@material-ui/core/Hidden';
 
+
+import Paper from '@material-ui/core/Paper';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Select from '@material-ui/core/Select';
+import Switch from '@material-ui/core/Switch';
+
+import Search from './Search.js';
+
 import {BrowserRouter as Router, NavLink} from 'react-router-dom'
 
-import mobileArq from './icons/mobileArq.png';
+
 import LeftNav from './LeftNav';
-import ContentHeader from './ContentHeader.js';
 import Content from './Content.js';
 import Floater from './Floater.js';
 import withRoot from './withRoot';
@@ -59,16 +70,30 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing.unit * 3,
     marginTop: '60px',
-  }
+  },
+  paper: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
+    width: '100%',
+    padding: 20,
+    marginTop: theme.spacing.unit * 3,
+    marginBottom: 20
+  },
+
+  column: {
+    minWidth: 150,
+    padding: 10
+  },
 });
-
-
 
 class Layout extends React.Component {
   state = {
     auth: true,
     anchorEl: null,
-    mobileOpen: false
+    mobileOpen: false,
+    school: 'Coleytown Elementary',
+    class: 1,
   };
 
   handleChange = (event, checked) => {
@@ -83,10 +108,6 @@ class Layout extends React.Component {
     this.setState({ anchorEl: null });
   };
 
-  handleSchoolChange = event => {
-    this.setState({ [event.target.name]: event.target.value });
-  };
-
   handleClassChange = event => {
     this.setState({ [event.target.name]: event.target.value });
   };
@@ -95,15 +116,80 @@ class Layout extends React.Component {
     this.setState({ mobileOpen: !this.state.mobileOpen });
   };
 
+  handleSchoolChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value
+    });
+  };
+
   render() {
-    const { classes } = this.props;
+    const { classes, type } = this.props;
     const { auth, anchorEl } = this.state;
     const open = Boolean(anchorEl);
+
+    const ContentHeader = (
+      <Paper className={classes.paper} elevation={10}>
+        <Grid item>
+          <div className={classes.column}>
+            <Search />
+          </div>
+        </Grid>
+        <Grid item>
+          <div className={classes.column}>
+            <FormControl>
+              <InputLabel htmlFor="school-simple">School</InputLabel>
+              <Select
+                value={this.state.school}
+                onChange={this.handleSchoolChange}
+                input={<Input id="school-simple" name="school" />}
+                autoWidth
+              >
+                <MenuItem value="Coleytown Elementary">Coleytown Elementary</MenuItem>
+                <MenuItem value="Greens Farms Elementary">Greens Farms Elementary</MenuItem>
+                <MenuItem value="Kings Highway Elementary">Kings Highway Elementary</MenuItem>
+                <MenuItem value="Long Lots Elementary">Long Lots Elementary</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
+        </Grid>
+        <Grid item>
+          <div className={classes.column}>
+            <FormControl>
+              <InputLabel htmlFor="class-simple">Class</InputLabel>
+              <Select
+                value={this.state.class}
+                onChange={this.handleClassChange}
+                inputProps={{
+                  name: 'class',
+                  id: 'class-simple',
+                }}
+                autoWidth
+              >
+                <MenuItem value={1}>1k</MenuItem>
+                <MenuItem value={2}>2k</MenuItem>
+                <MenuItem value={3}>3k</MenuItem>
+                <MenuItem value={4}>4k</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
+        </Grid>
+        <Grid item>
+          <FormGroup>
+            <FormControlLabel
+              control={
+                <Switch aria-label="LoginSwitch" color="primary" />
+              }
+              label={'Show only children'}
+            />
+          </FormGroup>
+        </Grid>
+      </Paper>
+    )
 
     return (
       <div>
         <div className={classes.root}>
-          <AppBar color="default" className={classes.appBar}>
+          <AppBar color="primary" className={classes.appBar}>
             <Toolbar>
               <IconButton
                 color="inherit"
@@ -114,7 +200,7 @@ class Layout extends React.Component {
                 <MenuIcon />
               </IconButton>
               <Typography variant="title" color="inherit" className={classes.logo}>
-                <img src={mobileArq} alt="MobileArq" />
+                {this.state.school}
               </Typography>
               {auth && (
                 <div>
@@ -175,6 +261,7 @@ class Layout extends React.Component {
             </Drawer>
           </Hidden>
           <main className={classes.content}>
+            {(type === 'school') ? ContentHeader : null}
             {this.props.render()}
           </main>
         </div>
@@ -188,4 +275,7 @@ Layout.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
+Layout.defaultProps = {
+  type: 'school'
+};
 export default withRoot(withStyles(styles)(Layout));

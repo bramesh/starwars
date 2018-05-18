@@ -7,8 +7,11 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import {People, Assignment, Info, AccountBox, Event, Message} from '@material-ui/icons';
 import Divider from '@material-ui/core/Divider';
+import Typography from '@material-ui/core/Typography';
 
-import {BrowserRouter as Router, Route, NavLink, Link} from 'react-router-dom'
+import {BrowserRouter as Router, Route, NavLink, Link} from 'react-router-dom';
+
+import mobileArq from './icons/mobileArq.png';
 
 const styles = theme => ({
   iconFaculty: {
@@ -26,6 +29,11 @@ const styles = theme => ({
   active: {
     color: 'red',
     fontWeight: 'bold'
+  },
+  logo: {
+    textAlign: 'center',
+    padding: 5,
+    marginBottom: 10
   }
 })
 
@@ -33,10 +41,17 @@ class LeftNav extends React.Component {
     render() {
       const { classes } = this.props;
 
-
+      
 
       return(
         <div>
+          <div className={classes.logo}>
+            <img src={mobileArq} alt="MobileArq" />
+            <Typography variant="caption">
+              Directories +
+            </Typography>
+          </div>
+          <Divider />
           <List component="nav">
             <ListItem to="/" component={NavLink} activeClassName={classes.active} button>
               <ListItemIcon color="primary">
@@ -69,7 +84,6 @@ class LeftNav extends React.Component {
               <ListItemText primary="Calendar" />
             </ListItem>
           </List>
-          <Divider />
         </div>
       )
     }
