@@ -54,7 +54,7 @@ class LeftNav extends React.Component {
           </div>
           <Divider />
           <MenuList>
-            <MenuItem component={props => <NavLink to="/" className={isActive => isActive} />} selected>
+            <MenuItem to="/" component={NavLink} selected>
               <ListItemIcon color="primary">
                 <People />
               </ListItemIcon>
