@@ -16,7 +16,7 @@ import {Message} from '@material-ui/icons';
 const styles = theme => ({
   floater: {
     position: 'fixed',
-    bottom: 50,
+    bottom: 20,
     left: 20,
     zIndex: 2000
   },
@@ -38,7 +38,7 @@ class Floater extends React.Component {
     handleModalClose = () => {
       this.setState({ modalOpen: false });
     };
-    
+
     render() {
       const { classes } = this.props;
       const {modalOpen} = this.state;

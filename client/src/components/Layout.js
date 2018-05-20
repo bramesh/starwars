@@ -44,7 +44,7 @@ const styles = theme => ({
     display: 'flex',
     width: '100%',
   },
-  logo: {
+  title: {
     flex: 1
   },
   appBar: {
@@ -131,11 +131,6 @@ class Layout extends React.Component {
       <Paper className={classes.paper} elevation={10}>
         <Grid item>
           <div className={classes.column}>
-            <Search />
-          </div>
-        </Grid>
-        <Grid item>
-          <div className={classes.column}>
             <FormControl>
               <InputLabel htmlFor="school-simple">School</InputLabel>
               <Select
@@ -174,14 +169,9 @@ class Layout extends React.Component {
           </div>
         </Grid>
         <Grid item>
-          <FormGroup>
-            <FormControlLabel
-              control={
-                <Switch aria-label="LoginSwitch" color="primary" />
-              }
-              label={'Show only children'}
-            />
-          </FormGroup>
+          <div className={classes.column}>
+            <Search />
+          </div>
         </Grid>
       </Paper>
     )
@@ -199,7 +189,7 @@ class Layout extends React.Component {
               >
                 <MenuIcon />
               </IconButton>
-              <Typography variant="title" color="inherit" className={classes.logo}>
+              <Typography variant="title" color="inherit" className={classes.title}>
                 {this.state.school}
               </Typography>
               {auth && (

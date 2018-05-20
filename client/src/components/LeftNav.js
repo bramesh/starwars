@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
+import MenuList  from '@material-ui/core/MenuList';
+import MenuItem from '@material-ui/core/MenuItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import {People, Assignment, Info, AccountBox, Event, Message} from '@material-ui/icons';
@@ -33,7 +33,8 @@ const styles = theme => ({
   logo: {
     textAlign: 'center',
     padding: 5,
-    marginBottom: 10
+    marginTop: 5,
+    marginBottom: 5
   }
 })
 
@@ -41,7 +42,7 @@ class LeftNav extends React.Component {
     render() {
       const { classes } = this.props;
 
-      
+
 
       return(
         <div>
@@ -52,38 +53,38 @@ class LeftNav extends React.Component {
             </Typography>
           </div>
           <Divider />
-          <List component="nav">
-            <ListItem to="/" component={NavLink} activeClassName={classes.active} button>
+          <MenuList>
+            <MenuItem component={props => <NavLink to="/" className={isActive => isActive} />} selected>
               <ListItemIcon color="primary">
                 <People />
               </ListItemIcon>
               <ListItemText primary="Families" />
-            </ListItem>
-            <ListItem to="/faculty" component={NavLink} activeClassName={classes.active} button>
+            </MenuItem>
+            <MenuItem to="/faculty" component={NavLink} activeClassName={classes.active} button>
               <ListItemIcon className={classes.iconFaculty}>
                 <Assignment />
               </ListItemIcon>
               <ListItemText primary="Faculty" />
-            </ListItem>
-            <ListItem to="/members" component={NavLink} activeClassName={classes.active} button>
+            </MenuItem>
+            <MenuItem to="/members" component={NavLink} activeClassName={classes.active} button>
               <ListItemIcon className={classes.iconMembers}>
                 <AccountBox />
               </ListItemIcon>
               <ListItemText primary="Members" />
-            </ListItem>
-            <ListItem to="/schoolinfo" component={NavLink} activeClassName={classes.active} button>
+            </MenuItem>
+            <MenuItem to="/schoolinfo" component={NavLink} activeClassName={classes.active} button>
               <ListItemIcon className={classes.iconSchoolInfo}>
                 <Info />
               </ListItemIcon>
               <ListItemText primary="School Info" />
-            </ListItem>
-            <ListItem to="/eventcalendar" component={NavLink} activeClassName={classes.active} button>
+            </MenuItem>
+            <MenuItem to="/eventcalendar" component={NavLink} activeClassName={classes.active} button>
               <ListItemIcon>
                 <Event className={classes.iconEvent} />
               </ListItemIcon>
               <ListItemText primary="Calendar" />
-            </ListItem>
-          </List>
+            </MenuItem>
+          </MenuList>
         </div>
       )
     }
