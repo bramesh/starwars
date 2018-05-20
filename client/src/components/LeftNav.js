@@ -38,11 +38,32 @@ const styles = theme => ({
   }
 })
 
+class LeftNavLink extends React.Component {
+  render() {
+    const {
+      label,
+      icon,
+      to,
+      activeOnlyWhenExact
+    } = this.props;
+    return (
+      <Route
+        path={to}
+        exact={activeOnlyWhenExact}
+        children={({ match }) => (
+          <MenuItem component={NavLink} to={to} button selected={(match && match.isExact)}>
+            {this.props.icon()}
+            <ListItemText primary={label} />
+          </MenuItem>
+        )}
+      />
+    )
+  }
+}
+
 class LeftNav extends React.Component {
     render() {
       const { classes } = this.props;
-
-
 
       return(
         <div>
@@ -54,36 +75,31 @@ class LeftNav extends React.Component {
           </div>
           <Divider />
           <MenuList>
-            <MenuItem to="/" component={NavLink} selected>
-              <ListItemIcon color="primary">
+            <LeftNavLink label="Families" to="/" activeOnlyWhenExact={true} icon={() => (
+              <ListItemIcon>
                 <People />
               </ListItemIcon>
-              <ListItemText primary="Families" />
-            </MenuItem>
-            <MenuItem to="/faculty" component={NavLink} activeClassName={classes.active} button>
+            )} />
+            <LeftNavLink label="Faculty" to="/faculty" activeOnlyWhenExact={true} icon={() => (
               <ListItemIcon className={classes.iconFaculty}>
                 <Assignment />
               </ListItemIcon>
-              <ListItemText primary="Faculty" />
-            </MenuItem>
-            <MenuItem to="/members" component={NavLink} activeClassName={classes.active} button>
+            )} />
+            <LeftNavLink label="Members" to="/members" activeOnlyWhenExact={true} icon={() => (
               <ListItemIcon className={classes.iconMembers}>
-                <AccountBox />
+                <Assignment />
               </ListItemIcon>
-              <ListItemText primary="Members" />
-            </MenuItem>
-            <MenuItem to="/schoolinfo" component={NavLink} activeClassName={classes.active} button>
+            )} />
+            <LeftNavLink label="School Info" to="/schoolinfo" activeOnlyWhenExact={true} icon={() => (
               <ListItemIcon className={classes.iconSchoolInfo}>
                 <Info />
               </ListItemIcon>
-              <ListItemText primary="School Info" />
-            </MenuItem>
-            <MenuItem to="/eventcalendar" component={NavLink} activeClassName={classes.active} button>
-              <ListItemIcon>
-                <Event className={classes.iconEvent} />
+            )} />
+            <LeftNavLink label="Calendar" to="/eventcalendar" activeOnlyWhenExact={true} icon={() => (
+              <ListItemIcon className={classes.iconEvent}>
+                <Event />
               </ListItemIcon>
-              <ListItemText primary="Calendar" />
-            </MenuItem>
+            )} />
           </MenuList>
         </div>
       )
