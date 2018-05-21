@@ -69,7 +69,7 @@ const styles = theme => ({
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing.unit * 3,
-    marginTop: '60px',
+    marginTop: 40,
   },
   paper: {
     display: 'flex',

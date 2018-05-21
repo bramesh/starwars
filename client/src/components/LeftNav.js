@@ -27,7 +27,6 @@ const styles = theme => ({
     color: '#3F51B5'
   },
   active: {
-    color: 'red',
     fontWeight: 'bold'
   },
   logo: {
@@ -76,7 +75,7 @@ class LeftNav extends React.Component {
           <Divider />
           <MenuList>
             <LeftNavLink label="Families" to="/" activeOnlyWhenExact={true} icon={() => (
-              <ListItemIcon>
+              <ListItemIcon color="primary">
                 <People />
               </ListItemIcon>
             )} />

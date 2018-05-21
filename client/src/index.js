@@ -12,14 +12,14 @@ import './bootstrap.min.css';
 import Home from './components/pages/Home/Home';
 import AppRoutes from './routes';
 
+import reducers from './reducers/index.js';
 
 
-const middleware =applyMiddleware(thunk, logger);
+
+const middleware = applyMiddleware(thunk, logger);
 // WE WILL PASS INITIAL STATE FROM SERVER STORE
 const initialState = window.INITIAL_STATE;
-const reducers = function(state, action) {
-	return 0
-}
+
 const store = createStore(reducers, initialState, middleware);
 
 
