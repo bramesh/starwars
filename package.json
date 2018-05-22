@@ -3,13 +3,17 @@
   "version": "1.0.0",
   "scripts": {
     "client": "cd client && yarn start",
-    "server": "nodemon server.js",
-    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
-    "start": "node server.js"
+    "HTTP_SERVER": "nodemon ./bin/www",
+    "API_SERVER": "nodemon apiServer.js",
+    "dev": "concurrently --kill-others-on-fail \"yarn HTTP_SERVER\" \"yarn API_SERVER\" \"yarn client\"",
+    "start": "node ./bin/www & node apiServer.js"
   },
   "dependencies": {
+    "body-parser": "^1.18.3",
     "cors": "^2.8.4",
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "http-proxy": "^1.17.0",
+    "morgan": "^1.9.0"
   },
   "devDependencies": {
     "concurrently": "^3.5.0"
