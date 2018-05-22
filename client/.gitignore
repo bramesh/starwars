@@ -6,6 +6,9 @@
 # testing
 /coverage
 
+# config
+/config
+
 # production
 # TODO - This build folder should be generated automatically in production too /build
 
