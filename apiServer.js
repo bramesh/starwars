@@ -45,10 +45,9 @@ app.get('/families', function(req, res){
   )
 });
 
-
 app.listen(5001, function(err){
   if(err){
     return console.log(err);
   }
-  console.log('API Sever is listening on http://localhost:5001');
+  console.log('API Sever is listening on port 5001');
 });

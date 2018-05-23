@@ -6,10 +6,16 @@ const logger = require('morgan');
 const app = express();
 app.use(logger('dev'));
 
+let hostname = null;
+if (process.env.NODE_ENV === 'development') {
+  hostname = 'localhost'
+} else if (process.env.NODE_ENV === 'production') {
+  hostname = 'mobilearq.onappcafe.com'
+}
 
 //PROXY TO API
 const apiProxy = httpProxy.createProxyServer({
-  target: "http://localhost:5001"
+  target: 'http://' + hostname + ':5001'
 });
 app.use('/api', function(req, res){
   apiProxy.web(req, res);
